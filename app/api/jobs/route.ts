@@ -24,7 +24,7 @@ export async function GET(request: Request) {
       salary: searchParams.get('salary') || '',
       experienceLevel: searchParams.get('experienceLevel') || '',
       sortBy: searchParams.get('sortBy') || 'relevant',
-      limit: Math.min(Number(searchParams.get('limit')) || 25, 100), // Cap at 100
+      limit: Math.min(Number(searchParams.get('limit')) || 25, 50), // Cap at 50 for performance
       page: Math.max(Number(searchParams.get('page')) || 0, 0), // Ensure non-negative
     };
 

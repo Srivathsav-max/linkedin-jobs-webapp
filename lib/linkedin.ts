@@ -11,7 +11,7 @@ export class JobCache {
 
   constructor() {
     this.cache = new Map();
-    this.TTL = 1000 * 60 * 60; // 1 hour
+    this.TTL = 1000 * 60 * 60 * 24; // 24 hours
   }
 
   set(key: string, value: Job[]) {
@@ -152,6 +152,8 @@ export class Query {
     let allJobs: Job[] = [];
     let start = 0;
     const BATCH_SIZE = 25;
+    const MAX_EXECUTION_TIME = 8000; // 8 seconds max execution time
+    const startTime = Date.now();
     let hasMore = true;
     let consecutiveErrors = 0;
     const MAX_CONSECUTIVE_ERRORS = 3;
@@ -185,7 +187,13 @@ export class Query {
           consecutiveErrors = 0;
           start += BATCH_SIZE;
 
-          await delay(2000 + Math.random() * 1000);
+          // Check if we're approaching the timeout
+          if (Date.now() - startTime > MAX_EXECUTION_TIME) {
+            console.log("Approaching execution time limit, returning current results");
+            break;
+          }
+          
+          await delay(1000 + Math.random() * 500); // Reduced delay
         } catch (error) {
           consecutiveErrors++;
           console.error(`Error fetching batch (attempt ${consecutiveErrors}):`, error);
@@ -236,7 +244,7 @@ export class Query {
       const response = await axios.get(this.url(start), {
         headers,
         validateStatus: (status) => status === 200,
-        timeout: 10000,
+        timeout: 5000, // Reduced timeout for each request
         maxRedirects: 5
       });
 
