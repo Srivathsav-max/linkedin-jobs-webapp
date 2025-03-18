@@ -54,7 +54,7 @@ export function CommandMenu() {
               <CreditCard className="mr-2 h-4 w-4" />
               Visit LinkedIn Jobs
             </CommandItem>
-            <CommandItem onSelect={() => window.open("https://github.com/VishwaGauravIn/linkedin-jobs-api", "_blank")}>
+            <CommandItem onSelect={() => window.open("https://github.com/Srivathsav-max/linkedin-jobs-webapp", "_blank")}>
               <Settings className="mr-2 h-4 w-4" />
               View Source
             </CommandItem>

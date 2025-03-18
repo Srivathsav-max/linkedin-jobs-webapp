@@ -53,7 +53,7 @@ export function Header() {
             <ThemeToggle />
             <Button variant="ghost" size="sm" className="w-9 px-0" asChild>
               <a
-                href="https://github.com/VishwaGauravIn/linkedin-jobs-api"
+                href="https://github.com/Srivathsav-max/linkedin-jobs-webapp"
                 target="_blank"
                 rel="noreferrer"
               >
